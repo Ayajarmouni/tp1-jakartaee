@@ -18,23 +18,16 @@
         <h:form id="form">
 
             <p:outputLabel for="rolesysteme" value="Rôle de l'API : "/>
-            <!-- La valeur choisie dans cette liste déroulante sera affectée
-            à la propriété systemRole du backing bean. Cette liste est figée (disabled)
-            dès qu'une requête a été envoyée au serveur. -->
             <p:selectOneMenu id="rolesysteme" value="#{bb.roleSysteme}" editable="true"
                              required="true" requiredMessage="Vous devez indiquer le rôle de l'API"
                              disabled="#{! bb.roleSystemeChangeable}">
                 <f:selectItems value="#{bb.rolesSysteme}"/>
             </p:selectOneMenu>
-            <!-- Message d'erreur ici si l'utilisateur oublie d'indiquer un rôle système. -->
             <h:message for="rolesysteme" errorStyle="color: red" />
 
-            <!-- Si on veut commencer un nouveau chat avec, éventuellement, un autre rôle. -->
             <h:outputText value="  "/>
             <h:commandButton value="Nouveau chat" action="#{bb.nouveauChat}" />
 
-            <!-- Les éléments de la page sont disposés en deux colonnes :
-            question et réponse à gauche et historique de la conversation à droite. -->
             <h:panelGrid id="paneltotal" columns="2" columnClasses="topAligned,topAligned">
 
                 <h:panelGrid id="panelgauche" columns="1">
@@ -53,7 +46,29 @@
                         </h:panelGroup>
                         <h:inputTextarea id="reponse" value="#{bb.reponse}" title="Réponse"
                                          cols="50" rows="15"/>
+
+                        <!-- Switch du mode debug -->
+                        <p:outputPanel style="display:flex; align-items: center; gap: 10px">
+                            <h:outputText value="Mode debug : "/>
+                            <p:toggleSwitch id="debugSwitch" value="#{bb.debug}" styleClass="mb-2" label="Mode debug">
+                                <p:ajax update="debugContainer"/>
+                            </p:toggleSwitch>
+                            <p:tooltip for="debugSwitch"
+                                       value="Active ou non l'affichage du JSON sur les requêtes et réponses du LLM."/>
+                        </p:outputPanel>
                     </h:panelGrid>
+
+                    <!-- Panel debug : JSON échangé avec le LLM -->
+                    <h:panelGroup id="debugContainer" layout="block">
+                        <h:panelGrid id="debug" columns="1" rendered="#{bb.debug}">
+                            <h:outputText value="JSON de la requête :"/>
+                            <h:inputTextarea id="texteRequeteJson" value="#{bb.texteRequeteJson}"
+                                             rows="10" cols="50" readonly="true"/>
+                            <h:outputText value="JSON de la réponse :"/>
+                            <h:inputTextarea id="texteReponseJson" value="#{bb.texteReponseJson}"
+                                             rows="10" cols="50" readonly="true"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
 
                 </h:panelGrid>
                 <h:panelGrid id="paneldroit" columns="1" style="vertical-align: top;">

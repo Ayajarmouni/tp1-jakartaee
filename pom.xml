@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tp0</groupId>
-    <artifactId>tp0</artifactId>
+    <artifactId>tp_jarmouniaya</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>tp0</name>
+    <name>tp_jarmouniaya</name>
     <packaging>war</packaging>
 
     <properties>
@@ -76,6 +76,11 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
