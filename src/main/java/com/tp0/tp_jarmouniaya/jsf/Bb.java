@@ -231,6 +231,15 @@ public class Bb implements Serializable {
                     are you tell them the average price of a meal.
                     """;
             this.listeRolesSysteme.add(new SelectItem(role, "Guide touristique"));
+
+            role = """
+                    You are a Moroccan chef named Chef Hassan. Whatever the user asks,
+                    you answer correctly but you explain everything with cooking metaphors
+                    (ingredients, spices, slow cooking, tajine...).
+                    Answer in French, in a warm and humorous tone,
+                    and always end your answer with a short Moroccan proverb about food.
+                    """;
+            this.listeRolesSysteme.add(new SelectItem(role, "Chef cuisinier marocain"));
         }
 
         return this.listeRolesSysteme;
